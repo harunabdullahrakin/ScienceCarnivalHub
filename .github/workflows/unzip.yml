@@ -1,0 +1,20 @@
+name: Unzip gg.zip
+
+on:
+  push:
+    paths:
+      - gg.zip  # Trigger on changes to the zip file
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Unzip gg.zip
+        run: |
+          unzip gg.zip -d extracted  # You can change the destination folder if needed
+          # After unzipping, move files to the root if necessary
+          mv extracted/* .
+          rm -r extracted  # Cleanup the folder
